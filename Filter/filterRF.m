@@ -1,12 +1,15 @@
 function [flted] = filterRF(rrfAmpArray,timeAxisHD,binAxisHD)
 % Written by Evan Zhang
 %
-% function to filter the RF (generated from crust + sediment model).
-% Input
-% mname (model name) and no (model index).
-% the progrma will look for (Eg. mname = 'test', no = 1) test1_syn.mat and
-% apply the resonance removal filter to the radial RF (rRF in the matlab
-% structure), and save it in a new file called test1_syn_filtered.mat
+% function to filter the RF.
+%
+% Input:
+% rrfAmpArray - radial RF, timeAxisHD - time vector,
+% binAxisHD - epicentral distances bins.
+%
+% Output:
+% flted - filtered RF.
+
 
 clear i;
 
