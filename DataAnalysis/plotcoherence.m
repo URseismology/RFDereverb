@@ -1,24 +1,9 @@
 clear coher*
 % make plot for station average ZR coherence
 
-network = 'XO';
-station = {'LA21','LA23','LA25','LA28','LA30','LA32','LA33',...
-    'LA34','LA39','LD36','LD38','LD41','LD44','LD45',...
-    'LT01','LT03','LT04','LT07','LT08','LT10','LT11',...
-    'LT12','LT13','LT15','LT16','LT17','LT20','WD48',...
-    'WD49','WD50','WD51','WD52','WD53','WD54','WD55','WD57','WD58',...
-    'WD60','WD61','WD62','WD63','WD64','WD65','WD66','WD67','WD68','WD69','WD70',...
-    'WS71','WS74','WS75'};
+network = 'ZA';
+station = {'B13','B15'};
 station = string(station);
-
-stalist = {'LA21','LA22','LA23','LA25','LA26','LA28','LA29','LA30','LA32','LA33',...
-'LA34','LA39','LD35','LD36','LD37','LD38','LD40','LD41','LD42','LD44','LD45',...
-'LT01','LT02','LT03','LT04','LT05','LT06','LT07','LT08','LT09','LT10','LT11',...
-'LT12','LT13','LT14','LT15','LT16','LT17','LT18','LT20','WD46','WD47','WD48',...
-'WD49','WD50','WD51','WD52','WD53','WD54','WD55','WD56','WD57','WD58','WD59',...
-'WD60','WD61','WD62','WD63','WD64','WD65','WD66','WD67','WD68','WD69','WD70',...
-'WD71','WD72','WD73','WD74','WD75','WS71','WS72','WS73','WS74','WS75'};
-stainfo = dlmread('/Users/evan/Documents/bluehive/Prj4_Nomelt/5_Results/Fig_AACSE/XOstation.txt');
 
 c = 7;
 r = ceil(length(station)/c);
@@ -54,22 +39,6 @@ for is = 1:length(station)
     %         plot(ff,coherZP,'b-','linewi',1); hold on;
     %         pn = plot(ff,coherZPN,'b-'); pn.Color(4) = 0.4; hold on;
     %         xlim([0 6]);
-    
-    % find and add water/sediment frequencies
-    
-    for ii = 1:length(stalist)
-        if strcmp(staname,stalist(ii))
-            Hw = -stainfo(ii,3) / 1000;
-            Hs = stainfo(ii,4) / 1000;
-            break;
-        end
-    end
-    
-    vw = 1.5;
-
-    for iw = 1:10
-        xline((2 * iw - 1) * vw / (4 * Hw),'b--'); hold on;
-    end
     
     
     xlim([1.01e-2 2]);
@@ -183,4 +152,4 @@ end
 % set(gca,'YTickLabel',get(gca,'YTickLabel'),'fontsize',18);
 
 
-saveFig('Fig_ZRCoherence_water.pdf','/Users/evan/Documents/bluehive/Prj4_Nomelt/5_Results/Fig_AACSE/',1,hhh);
+saveFig('Fig_ZRCoherence_water.pdf','Your Directory',1,hhh);
