@@ -3,10 +3,10 @@ function filterRFfunc(localTeleDir, mname)
 %
 % function to filter the RF (generated from crust + sediment model).
 % Input
-% mname (model name) and no (model index).
-% the progrma will look for (Eg. mname = 'test', no = 1) test1_syn.mat and
-% apply the resonance removal filter to the radial RF (rRF in the matlab
-% structure), and save it in a new file called test1_syn_filtered.mat
+% mname (model name).
+% the progrma will look for (Eg. mname = 'test') test_syn.mat and
+% apply the dereverberation filter to the radial RF (rRF in the matlab
+% structure), and save it in a new file called test_syn_filtered.mat
 
 clear i;
 
@@ -34,7 +34,7 @@ w = dw*[0:N/2,-N/2+1:-1]';
 % figure(1);
 % clf;
 
-for iRF = 1:20
+for iRF = 1:20 % number of traces
 %     iRF
     
     % autocorrelation
