@@ -1,9 +1,11 @@
 function [f,Nf,s2noiMean,s2sigMean] ...
     = psdcompute(localBaseDir,station,cmp,method)
 % Author: Evan Zhang
+%
 % Compute PSD for signals and noises of filtered seismograms
 %
-%
+% cmp = 1 - conventional; cmp = 2 - jLab
+
 clear s2*
 
 evtnm = 'test';
@@ -11,61 +13,22 @@ evtnm = 'test';
 ii = 1;
 jj = 1;
 
-% for ZA stations %%%%%%%%%%%%%%%%%
-% 
-% maindir = strcat(localBaseDir,'Prj4_Nomelt/2_Data/SAC/XO/',station,'/');
-% fid = fopen(strcat(localBaseDir,'Prj4_Nomelt/2_Data_Jul20/meta_Data/ZA/ZA_BAV_good.in'));
-% while ischar(evtnm)
-%     clear evtnm;
-%     evtnm = fgetl(fid);
-%     if ~ischar(evtnm)
-%         continue;
-%     end
-%     if strcmp(evtnm(66:68),station)
-%         sacnm(ii) = string(strcat(evtnm(63:end),cmp));
-%         ii = ii + 1;
-%     end
-% end
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% load data
+ 
+ maindir = strcat(localBaseDir,'Prj4_Nomelt/2_Data/SAC/XO/',station,'/');
+ fid = fopen(strcat(localBaseDir,'Prj4_Nomelt/2_Data/meta_Data/ZA/ZA.in'));
+ while ischar(evtnm)
+     clear evtnm;
+     evtnm = fgetl(fid);
+     if ~ischar(evtnm)
+         continue;
+     end
+     if strcmp(evtnm(66:68),station)
+         sacnm(ii) = string(strcat(evtnm(63:end),cmp));
+         ii = ii + 1;
+     end
+ end
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% for XO stations %%%%%%%%%%%%%%%%%%
-
-maindir = strcat(localBaseDir,'Prj4_Nomelt/2_Data/SAC/XO/',station,'/');
-findfiles = char(strcat(maindir,'XO*..Z'));
-files = dir(findfiles);
-for ii = 1:length(files)
-    sacnm(ii) = string(strcat(files(ii).name(1:end-1),cmp));
-end
-
-% for IU stations %%%%%%%%%%%%%%%%%%
-%
-% maindir = strcat(localBaseDir,'Prj4_Nomelt/2_Data/SAC/IU/',station,'/');
-% fid = fopen(strcat(localBaseDir,'Prj4_Nomelt/2_Data/meta_Data/IU/IU_',station,'.in'));
-% while ischar(evtnm)
-%     clear evtnm;
-%     evtnm = fgetl(fid);
-%     if ~ischar(evtnm)
-%         continue;
-%     end
-%     sacnm(ii) = string(strcat(evtnm(62:end),cmp));
-%     ii = ii + 1;
-% end
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% for Synthetics %%%%%%%%%%%%%%%%%%%
-%
-% maindir = strcat(localBaseDir,'Prj4_Nomelt/3_Src/telewavesim/Notebooks/',...
-%     station,'/');
-% for ii = 1:20
-%     sacnm(ii) = string(strcat(station,'.',cmp,num2str(ii,'%02.f'),'.sac'));
-% end
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 for i = 1:length(sacnm)
@@ -93,10 +56,6 @@ for i = 1:length(sacnm)
     
     dnoi = trace(Nb:Ne); % noise
     dsig = trace(Pb:Pe); % signal
-    
-    %%%%%%%% for synthetic %%%%%%%%%
-%     dsig = trace;
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     Dt = S.DELTA;
     N = length(dsig);
