@@ -9,7 +9,7 @@ The Signature and Elimination of Sediment Reverberations on Submarine Receiver F
 ### Preliminary Data Analysis
 Power Spectra\
 Coherence\
-Quality Control (Bandpass)\
+Quality Control (Bandpass)
 
 ### Receiver Function: Computation, Stacking, Visualization
 
