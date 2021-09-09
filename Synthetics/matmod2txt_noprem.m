@@ -1,7 +1,7 @@
-function matmod2txt_noprem(modstruc, SACIN, no)
+function matmod2txt_noprem(modstruc, modelDir, modname)
 
 m = modstruc;
-modelFile = [SACIN 'WavesimMod' int2str(no) '.txt'];
+modelFile = [modelDir modname '.txt'];
 
 nZ = length(m.Dz);
 

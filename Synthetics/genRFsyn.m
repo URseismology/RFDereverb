@@ -1,5 +1,5 @@
 function genRFsyn(Dz, rho, Vp, Vs, Vperc, Trend, ...
-    Plunge, localTeleDir, no)
+    Plunge, modelDir, modname)
 % Written by Evan Zhang
 %
 % function to generate model file for telewavesim
@@ -11,11 +11,8 @@ function genRFsyn(Dz, rho, Vp, Vs, Vperc, Trend, ...
 % the program will generate a model file called WavesimMod1.txt (Eg. no =
 % 1)
 
-Dir = localTeleDir;
-
 % built the model
 
-SACIN = strcat(Dir,'models/');
 model.Dz = Dz ;
 model.rho = rho;
 model.Vp = Vp ;
@@ -23,7 +20,7 @@ model.Vs = Vs ;
 model.Vperc = Vperc;
 model.Trend = Trend ;
 model.Plunge = Plunge;
-matmod2txt_noprem(model, SACIN, no)
+matmod2txt_noprem(model, modelDir, modname)
 
 end
 
